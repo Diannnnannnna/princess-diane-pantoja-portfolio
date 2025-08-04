@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Portfolio-About Me</title>
+
+    <!-- Style Link-->
+    <link href="output.css" rel="stylesheet" />
+   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+
+    <!-- Js Link -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+
+    <!-- Animation Style -->
+    <style>
+         @keyframes slideDownFade1 {
+            0% { opacity: 0; transform: translateY(-40px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-slide-down1 {
+            animation: slideDownFade1 0.6s ease-out both;
+        }
+
+        @keyframes slideDownFade {
+        0% { opacity: 0; transform: translateY(-30px); }
+        100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideUpFade {
+            0% { opacity: 0; transform: translateY(40px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideLeftFade {
+            0% { opacity: 0; transform: translateX(-40px); }
+            100% { opacity: 1; transform: translateX(0); }
+        }
+
+        .animate-slide-in-left {
+            animation: slideLeftFade 0.8s ease-out both;
+        }
+
+        @keyframes slideRightFade {
+            0% { opacity: 0; transform: translateX(40px); }
+            100% { opacity: 1; transform: translateX(0); }
+        }
+
+        .animate-slide-in-right {
+            animation: slideRightFade 0.8s ease-out both;
+        }
+
+        .delay-100 {
+            animation-delay: 0.1s;
+        }
+        .delay-200 {
+            animation-delay: 0.2s;
+        }
+        .slide-down-init {
+        opacity: 0;
+        transform: translateY(-30px);
+        }
+
+        .slide-down-active {
+            animation: slideDownFade 0.8s ease-out forwards;
+        }
+
+        .slide-up-init {
+            opacity: 0;
+            transform: translateY(40px);
+        }
+
+        .slide-up-active {
+            animation: slideUpFade 0.8s ease-out forwards;
+        }
+    </style>
+
+</head>
+  <body class="bg-[#1E0044] text-[#E9DEFF] max-w-full" style="font-family: 'Noto Sans', sans-serif;">
+    <!-- Tablet & Mobile View-->
+    <div class="lg:hidden" x-data="{ open: false }">
+        <!-- Navbar -->
+        <nav class="sticky top-0 left-0 w-full h-20 bg-[#0f012e]/30 backdrop-blur-md z-50 px-12 py-3 flex justify-between items-center">
+            <div class="flex items-center">
+                    <img src="assets/logo-2.webp" alt="Wireframe Witch Logo" class="w-50" />
+            </div>
+            <button @click="open = true" class="w-10 h-10 text-[#E9DEFF] flex items-center justify-center cursor-pointer">
+                <i class="ri-menu-line ri-lg"></i>
+            </button>
+        </nav>
+        <!-- Mobile Menu (Hidden by default) -->
+        <div x-show="open"
+            x-transition:enter="transition transform duration-300"
+            x-transition:enter-start="translate-x-full"
+            x-transition:enter-end="translate-x-0"
+            x-transition:leave="transition transform duration-300"
+            x-transition:leave-start="translate-x-0"
+            x-transition:leave-end="translate-x-full"
+            class="sticky top-0 right-0 w-full h-90 bg-[#0f012e]/95 z-50 flex flex-col items-center transform"
+            style="display: none;">
+            <!-- Close Button -->
+            <button @click="open = false" class="absolute top-4 right-4 text-[#E9DEFF] w-10 h-10 flex items-center justify-center cursor-pointer">
+                <i class="ri-close-line ri-lg"></i>
+            </button>
+
+            <div class="flex flex-col items-center mt-20 space-y-4">
+                <a href="index.html#home" class="text-xl text-[#E9DEFF] font-medium hover:text-[#8338EC] transition-colors">Home</a>
+                <a href="profile-page.html" class="text-xl text-[#E9DEFF] font-medium hover:text-[#8338EC] transition-colors">About</a>
+                <a href="profile-page.html#skills1" class="text-xl text-[#E9DEFF] font-medium hover:text-[#8338EC] transition-colors">Skills</a>
+                <a href="profile-page.html#portfolio1" class="text-xl text-[#E9DEFF] font-medium hover:text-[#8338EC] transition-colors">Portfolio</a>
+                <a href="index.html#contact" class="text-xl text-[#E9DEFF] font-medium hover:text-[#8338EC] transition-colors">Contact</a>
+            </div>
+        </div>
+        <!-- Main Content -->
+        <main class="px-12 py-10 space-y-10">
+            <!-- About Section -->
+            <section id="about1" class="py-8">
+                <div class="flex flex-col items-center">
+                    <div id="profile" class="relative w-48 h-48 mb-6 slide-down-init">
+                        <div x-data="{ open: false }" class="relative w-40 h-40">
+                            <!-- Thumbnail -->
+                            <img src="assets/profile.webp" alt="Profile" class="w-full h-full object-cover rounded-full" />
+                        
+                            <!-- Button -->
+                            <button @click="open = true" title="View Full Image">
+                                <div class="absolute -bottom-2 -right-2 w-10 h-10 bg-primary rounded-full flex items-center justify-center">
+                                    <img src="assets/view.webp" class="w-6 h-6" />
+                                </div>
+                            </button>
+
+                            <!-- Modal -->
+                            <div x-show="open" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50" @click.away="open = false">
+                                <img src="assets/profile.webp" alt="Full Profile" class="max-w-full max-h-[80vh] rounded-xl shadow-lg" />
+                            </div>
+                        </div>
+                    </div>
+                    <div id="profile-about" class="slide-up-init">
+                        <h1 class="text-3xl text-center font-medium mb-4">About Me</h1>
+                        <p class="text-sm fonr-normal leading-relaxed text-center mb-6">
+                            I am a Bachelor of Science in Computer Science graduate with practical experience in front-end web development.
+                            During my training at Fastrak Services Inc., I worked on real-world web projects, helping bring client websites
+                            to life through well-structured, visually appealing, and responsive designs.
+                        </p>
+                    </div>
+            
+                    <div id="profile-contact" class="flex flex-col slide-up-init items-center text-sm font-normal space-y-3">
+                        <a href="viber://chat?number=%2B639164036412" title="Message me on Viber" class="flex items-center space-x-2">
+                            <img src="assets/faPhone.webp" alt="Phone Number" class="w-4"/>
+                            <span>+6391 6403 6412</span></a>
+                        <a href="mailto:pantojaprincessdiane.05@gmail.com" class="flex items-center space-x-2">
+                            <img src="assets/faEnvelope.webp" alt="Email" class="w-4"/>
+                            <span>pantojaprincessdiane.05@gmail.com</span></a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Portfolio Section -->
+            <section id="portfolio1" class="py-8 sm:px-20 w-full xl:px-50 text-center">
+                <!-- Section Header -->
+                <div id="portfolio-header1" class="container mx-auto slide-down-init mb-12">
+                    <div class="h-px w-1/3 bg-gray-500 mx-auto mb-20"></div>
+                    <h2 class="text-3xl font-medium mb-8">Portfolio Showcase</h2>
+                    <p class="max-w-2xl mx-auto text-sm font-normal">
+                    A collection of my web design and development projects, highlighting my work in creating responsive, user-focused websites.
+                    Each project reflects my passion for clean code, intuitive design, and seamless user experiences.
+                    </p>
+                </div>
+                <!-- Wrapper with Alpine.js -->
+                <div x-data="{ category: 'project' }" class="container mx-auto">
+                    <!-- Filter Buttons -->
+                    <div class="flex justify-center space-x-1 sm:space-x-2 md:space-x-8 mb-12">
+                        <button 
+                        @click="category = 'project'" 
+                        :class="category === 'project' ? 'bg-[#8338EC]' : 'text-[#E9DEFF] hover:text-[#E9DEFF]'" 
+                        class="px-4 sm:px-6 py-2 rounded-full text-base font-medium"
+                        >&lt;/&gt; Projects</button>
+
+                        <button 
+                        @click="category = 'figma'" 
+                        :class="category === 'figma' ? 'bg-[#8338EC]' : 'text-[#E9DEFF] hover:text-[#E9DEFF]'" 
+                        class="px-4 sm:px-6 py-2 rounded-full text-base font-medium"
+                        >Figma</button>
+
+                        <button 
+                        @click="category = 'certificate'" 
+                        :class="category === 'certificate' ? 'bg-[#8338EC]' : 'text-[#E9DEFF] hover:text-[#E9DEFF]'" 
+                        class="px-4 sm:px-6 py-2 rounded-full text-base font-medium"
+                        >Graphic</button>
+                    </div>
+                    <!-- Card Sections -->
+                    <div class="relative space-y-4 px-6">
+                        <!-- Project Cards Container -->
+                        <div x-show="category === 'project'" x-transition class="space-y-10">
+                            <!-- Card 1 -->
+                            <a href="https://diannnnannnna.github.io/ecommerce-website-lfsi/" target="_blank"
+                            id="portfolio-cards1" class="bg-white/20  slide-up-init h-64 rounded-3xl flex items-center justify-center transition-transform duration-300 hover:scale-105">
+                            <img src="assets/project1.webp" alt="Project 1" class="w-full h-45"/>
+                            </a>
+                            <!-- Card 2 -->
+                            <a href="https://diannnnannnna.github.io/fastrak-services-inc/" target="_blank"
+                            id="portfolio-cards2" class="bg-white/20 slide-up-init h-64 rounded-3xl flex items-center justify-center transition-transform duration-300 hover:scale-105">
+                            <img src="assets/project2.webp" alt="Project 2" class="w-full h-45"/>
+                            </a>
+                            <!-- Card 3 -->
+                            <a href="https://diannnnannnna.github.io/dfampc-/" target="_blank"
+                            id="portfolio-cards3" class="bg-white/20 slide-up-init h-64 rounded-3xl flex items-center justify-center transition-transform duration-300 hover:scale-105">
+                            <img src="assets/project3.webp" alt="Project 3" class="w-full h-45"/>
+                            </a>
+                            <!-- Card 4 -->
+                            <a href="https://diannnnannnna.github.io/beauty-and-care/" target="_blank"
+                            id="portfolio-cards4" class="bg-white/20 slide-up-init h-64 rounded-3xl flex items-center justify-center transition-transform duration-300 hover:scale-105">
+                            <img src="assets/project4.webp" alt="Project 4" class="w-full h-45"/>
+                            </a>
+                        </div>
+
+                        <!-- Figma Designs -->
+                        <div x-show="category === 'figma'" x-transition class="space-y-10">
+                            <!-- Figma 1-->
+                            <a href="https://www.figma.com/design/wOQgDGeEXYcnB29nw3i9Mu/Life-Formula-Synergy-Inc.?node-id=0-1&t=hIBYVhPSMmarQ2ep-1" target="_blank"
+                                class="bg-white/20 h-64 rounded-3xl flex items-center justify-center hover:scale-105 transition">
+                            <img src="assets/figma1.webp" class="w-full h-45" />
+                            </a>
+                            <!-- Figma 2-->
+                            <a href="https://www.figma.com/design/Hi31cdjShecCuWhOnmv5de/Rotation?node-id=0-1&t=VZRKIsShGOQzQeuW-1" target="_blank"
+                                class="bg-white/20 h-64 rounded-3xl flex items-center justify-center hover:scale-105 transition">
+                                <img src="assets/figma2.webp" class="w-full h-45" />
+                            </a>
+                            <!-- Figma 3-->
+                             <a href="https://www.figma.com/design/CAuRZ3ckImZjf55tH1Zd92/TQ?node-id=0-1&t=JjYNIsjIrWBymONy-1" target="_blank"
+                                class="bg-white/20 h-64 rounded-3xl flex items-center justify-center hover:scale-105 transition">
+                                <img src="assets/figma3.webp" class="w-full h-45" />
+                            </a>
+                            <!-- Figma 4-->
+                            <a href="https://www.figma.com/design/2OsdfyGDCEHXXNAzjm8gXT/Finance-Web-Design?node-id=0-1&t=xH2oCR4LLmLGAi7B-1" target="_blank"
+                                class="bg-white/20 h-64 rounded-3xl flex items-center justify-center hover:scale-105 transition">
+                                <img src="assets/figma4.webp" class="w-full h-45" />
+                            </a>
+                            <!-- Figma 5-->
+                             <a href="https://www.figma.com/design/5c9IP3MQTnfbzdk1xDg6qe/Ecommerce-Web-Design?node-id=0-1&t=x3WRUi7Shw0Rdbng-1" target="_blank"
+                                class="bg-white/20 h-64 rounded-3xl flex items-center justify-center hover:scale-105 transition">
+                                <img src="assets/figma5.webp" class="w-full h-45" />
+                            </a>
+                            <!-- Figma 6-->
+                            <a href="https://www.figma.com/design/Zv0K3QM0LCA7ViENe1fQoe/TOSTA?node-id=0-1&t=3mLNnwy7ntI0DPAD-1" target="_blank"
+                                class="bg-white/20 h-64 rounded-3xl flex items-center justify-center hover:scale-105 transition">
+                                <img src="assets/figma6.webp" class="w-full h-45" />
+                            </a>
+                        </div>
+
+                        <!-- Certificate Cards -->
+                        <div x-show="category === 'certificate'" x-transition class="space-y-10">
+                             <!-- Logo Design -->
+                            <div class="swiper mySwiper absolute inset-0">
+                                <div class="swiper-wrapper my-4">
+                                    <!-- Card 1 -->
+                                    <div class="swiper-slide">
+                                    <a href="#" target="_blank"
+                                        class="bg-white/20 h-64 rounded-3xl overflow-hidden flex items-center justify-center transition-transform duration-300 hover:scale-105">
+                                        <img src="assets/logo1.webp" alt="Logo 1" class="w-full h-full"/>
+                                    </a>
+                                    </div>
+                                    <!-- Card 2 -->
+                                    <div class="swiper-slide">
+                                    <a href="#" target="_blank"
+                                        class="bg-white/20 h-64 rounded-3xl overflow-hidden flex items-center justify-center transition-transform duration-300 hover:scale-105">
+                                        <img src="assets/logo2.webp" alt="Logo 2" class="w-full h-full"/>
+                                    </a>
+                                    </div>
+                                    <!-- Card 3 -->
+                                    <div class="swiper-slide">
+                                    <a href="#" target="_blank"
+                                        class="bg-white/20 h-64 rounded-3xl overflow-hidden flex items-center justify-center transition-transform duration-300 hover:scale-105">
+                                        <img src="assets/logo3.webp" alt="Logo 3" class="w-full h-full"/>
+                                    </a>
+                                    </div>
+                                    <!-- Card 4 -->
+                                    <div class="swiper-slide">
+                                    <a href="#" target="_blank"
+                                        class="bg-white/20 h-64 rounded-3xl overflow-hidden flex items-center justify-center transition-transform duration-300 hover:scale-105">
+                                        <img src="assets/logo4.webp" alt="Logo 4" class="w-full h-full"/>
+                                    </a>
+                                    </div>
+                                    <!-- Card 5 -->
+                                    <div class="swiper-slide">
+                                    <a href="#" target="_blank"
+                                        class="bg-white/20 h-64 rounded-3xl overflow-hidden flex items-center justify-center transition-transform duration-300 hover:scale-105">
+                                        <img src="assets/logo5.webp" alt="Logo 5" class="w-full h-full"/>
+                                    </a>
+                                    </div>
+                                    <!-- Card 6 -->
+                                    <div class="swiper-slide">
+                                    <a href="#" target="_blank"
+                                        class="bg-white/20 h-64 rounded-3xl overflow-hidden flex items-center justify-center transition-transform duration-300 hover:scale-105">
+                                        <img src="assets/logo6.webp" alt="Logo 6" class="w-full h-full"/>
+                                    </a>
+                                    </div>
+                                    <!-- Card 7 -->
+                                    <div class="swiper-slide">
+                                    <a href="#" target="_blank"
+                                        class="bg-white/20 h-64 rounded-3xl overflow-hidden flex items-center justify-center transition-transform duration-300 hover:scale-105">
+                                        <img src="assets/logo7.webp" alt="Logo 7" class="w-full h-full"/>
+                                    </a>
+                                    </div>
+                                    <!-- Card 8 -->
+                                    <div class="swiper-slide">
+                                    <a href="#" target="_blank"
+                                        class="bg-white/20 h-64 rounded-3xl overflow-hidden flex items-center justify-center transition-transform duration-300 hover:scale-105">
+                                        <img src="assets/logo8.webp" alt="Logo 8" class="w-full h-full"/>
+                                    </a>
+                                    </div>
+                                    <!-- Card 9 -->
+                                    <div class="swiper-slide">
+                                    <a href="#" target="_blank"
+                                        class="bg-white/20 h-64 rounded-3xl overflow-hidden flex items-center justify-center transition-transform duration-300 hover:scale-105">
+                                        <img src="assets/logo9.webp" alt="Logo 9" class="w-full h-full"/>
+                                    </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Shirt Design -->
+                            <div class="swiper mySwiper absolute mt-10 inset-0">
+                                <div class="swiper-wrapper my-4">
+                                    <!-- Card 1 -->
+                                    <div class="swiper-slide">
+                                    <a href="#" target="_blank"
+                                        class="bg-white/20 h-64 rounded-3xl overflow-hidden flex items-center justify-center transition-transform duration-300 hover:scale-105">
+                                        <img src="assets/shirt1.webp" alt="Shirt 1" class="w-full h-full"/>
+                                    </a>
+                                    </div>
+                                    <!-- Card 2 -->
+                                    <div class="swiper-slide">
+                                    <a href="#" target="_blank"
+                                        class="bg-white/20 h-64 rounded-3xl overflow-hidden flex items-center justify-center transition-transform duration-300 hover:scale-105">
+                                        <img src="assets/shirt2.webp" alt="Shirt 2" class="w-full h-full"/>
+                                    </a>
+                                    </div>
+                                    <!-- Card 3 -->
+                                    <div class="swiper-slide">
+                                    <a href="#" target="_blank"
+                                        class="bg-white/20 h-64 rounded-3xl overflow-hidden flex items-center justify-center transition-transform duration-300 hover:scale-105">
+                                        <img src="assets/shirt3.webp" alt="Shirt 3" class="w-full h-full"/>
+                                    </a>
+                                    </div>
+                                    <!-- Card 4 -->
+                                    <div class="swiper-slide">
+                                    <a href="#" target="_blank"
+                                        class="bg-white/20 h-64 rounded-3xl overflow-hidden flex items-center justify-center transition-transform duration-300 hover:scale-105">
+                                        <img src="assets/shirt4.webp" alt="Shirt 4" class="w-full h-full"/>
+                                    </a>
+                                    </div>
+                                    <!-- Card 5 -->
+                                    <div class="swiper-slide">
+                                    <a href="#" target="_blank"
+                                        class="bg-white/20 h-64 rounded-3xl overflow-hidden flex items-center justify-center transition-transform duration-300 hover:scale-105">
+                                        <img src="assets/shirt5.webp" alt="Shirt 5" class="w-full h-full"/>
+                                    </a>
+                                    </div>
+                                    <!-- Card 6 -->
+                                    <div class="swiper-slide">
+                                    <a href="#" target="_blank"
+                                        class="bg-white/20 h-64 rounded-3xl overflow-hidden flex items-center justify-center transition-transform duration-300 hover:scale-105">
+                                        <img src="assets/shirt6.webp" alt="Shirt 6" class="w-full h-full"/>
+                                    </a>
+                                    </div>
+                                    <!-- Card 7 -->
+                                    <div class="swiper-slide">
+                                    <a href="#" target="_blank"
+                                        class="bg-white/20 h-64 rounded-3xl overflow-hidden flex items-center justify-center transition-transform duration-300 hover:scale-105">
+                                        <img src="assets/shirt7.webp" alt="Shirt 7" class="w-full h-full"/>
+                                    </a>
+                                    </div>
+                                    <!-- Card 8 -->
+                                    <div class="swiper-slide">
+                                    <a href="#" target="_blank"
+                                        class="bg-white/20 h-64 rounded-3xl overflow-hidden flex items-center justify-center transition-transform duration-300 hover:scale-105">
+                                        <img src="assets/shirt8.webp" alt="Shirt 8" class="w-full h-full"/>
+                                    </a>
+                                    </div>
+                                    <!-- Card 9 -->
+                                    <div class="swiper-slide">
+                                    <a href="#" target="_blank"
+                                        class="bg-white/20 h-64 rounded-3xl overflow-hidden flex items-center justify-center transition-transform duration-300 hover:scale-105">
+                                        <img src="assets/shirt9.webp" alt="Shirt 9" class="w-full h-full"/>
+                                    </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Poster Design -->
+                            <div class="swiper mySwiper absolute mt-10 inset-0">
+                                <div class="swiper-wrapper my-4">
+                                    <!-- Card 1 -->
+                                    <div class="swiper-slide">
+                                    <a href="#" target="_blank"
+                                        class="bg-white/20 h-64 rounded-3xl overflow-hidden flex items-center justify-center transition-transform duration-300 hover:scale-105">
+                                        <img src="assets/Poster1.webp" alt="Shirt 1" class="w-50 h-full"/>
+                                    </a>
+                                    </div>
+                                    <!-- Card 2 -->
+                                    <div class="swiper-slide">
+                                    <a href="#" target="_blank"
+                                        class="bg-white/20 h-64 rounded-3xl overflow-hidden flex items-center justify-center transition-transform duration-300 hover:scale-105">
+                                        <img src="assets/Poster2.webp" alt="Shirt 2" class="w-50 h-full"/>
+                                    </a>
+                                    </div>
+                                    <!-- Card 3 -->
+                                    <div class="swiper-slide">
+                                    <a href="#" target="_blank"
+                                        class="bg-white/20 h-64 rounded-3xl overflow-hidden flex items-center justify-center transition-transform duration-300 hover:scale-105">
+                                        <img src="assets/Poster3.webp" alt="Shirt 3" class="w-50 h-full"/>
+                                    </a>
+                                    </div>
+                                    <!-- Card 4 -->
+                                    <div class="swiper-slide">
+                                    <a href="#" target="_blank"
+                                        class="bg-white/20 h-64 rounded-3xl overflow-hidden flex items-center justify-center transition-transform duration-300 hover:scale-105">
+                                        <img src="assets/Poster4.webp" alt="Shirt 4" class="w-50 h-full"/>
+                                    </a>
+                                    </div>
+                                    <!-- Card 5 -->
+                                    <div class="swiper-slide">
+                                    <a href="#" target="_blank"
+                                        class="bg-white/20 h-64 rounded-3xl overflow-hidden flex items-center justify-center transition-transform duration-300 hover:scale-105">
+                                        <img src="assets/Poster5.webp" alt="Shirt 5" class="w-50 h-full"/>
+                                    </a>
+                                    </div>
+                                    <!-- Card 6 -->
+                                    <div class="swiper-slide">
+                                    <a href="#" target="_blank"
+                                        class="bg-white/20 h-64 rounded-3xl overflow-hidden flex items-center justify-center transition-transform duration-300 hover:scale-105">
+                                        <img src="assets/Poster6.webp" alt="Shirt 6" class="w-50 h-full"/>
+                                    </a>
+                                    </div>
+                                    <!-- Card 7 -->
+                                    <div class="swiper-slide">
+                                    <a href="#" target="_blank"
+                                        class="bg-white/20 h-64 rounded-3xl overflow-hidden flex items-center justify-center transition-transform duration-300 hover:scale-105">
+                                        <img src="assets/Poster7.webp" alt="Shirt 7" class="w-50 h-full"/>
+                                    </a>
+                                    </div>
+                                    <!-- Card 8 -->
+                                    <div class="swiper-slide">
+                                    <a href="#" target="_blank"
+                                        class="bg-white/20 h-64 rounded-3xl overflow-hidden flex items-center justify-center transition-transform duration-300 hover:scale-105">
+                                        <img src="assets/Poster8.webp" alt="Shirt 8" class="w-50 h-full"/>
+                                    </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Skills Section -->
+            <section id="skills1" class="py-8 sm:px-20 xl:px-50 w-full text-center">
+                <div class="container mx-auto">
+                    <!-- Section Header -->
+                    <div id="skills-header1" class="slide-down-init mb-12">
+                        <div class="h-px w-1/3 bg-gray-500 mx-auto mb-20"></div>
+                        <h2 class="text-3xl font-medium mb-8">Skills</h2>
+                    </div>
+                    <!-- Skills Cards Sections -->
+                    <div class="relative min-h-[18rem] grid grid-cols-1 lg:grid-cols-3 gap-6 mb-24">
+                        <!-- Card 1 -->
+                        <div id="skills-cards1" class="p-6 bg-white/20 h-full rounded-3xl text-start items-start justify-start transition-transform duration-300 hover:scale-105 slide-up-init">
+                            <img src="assets/uiux.webp" alt="Project 1" class="w-15 h-15 mb-8"/>
+                            <h2 class="text-xl font-medium mb-4">UI/UX Design</h2>
+                            <p class="text-sm w-full font-normal mb-3">Good design is more than just looks—it's about how it feels. I focus on user experience by designing interfaces that are both intuitive and enjoyable to use. I prioritize user needs and feedback to create flows and layouts that enhance usability, ensuring every interaction is smooth and meaningful.</p>
+                        </div>
+                        <!-- Card 2 -->
+                        <div id="skills-cards2" class="p-6 h-full ml-2 text-start items-start justify-start transition-transform duration-300 hover:scale-105 slide-up-init">
+                            <img src="assets/web.webp" alt="Project 1" class="w-15 h-15 mb-8"/>
+                            <h2 class="text-xl font-medium mb-4">Web Design</h2>
+                            <p class="text-sm w-full font-normal mb-3">I create intuitive, aesthetically pleasing web designs tailored to meet user expectations and business goals. My focus is on visual hierarchy, readability, and usability to ensure every design engages and guides users naturally. From wireframes to polished mockups, I aim for clarity and consistency in every detail.</p>
+                        </div>
+                        <!-- Card 3 -->
+                        <div id="skills-cards3" class="p-6 h-full text-start items-start justify-start transition-transform duration-300 hover:scale-105 slide-up-init">
+                            <img src="assets/code.webp" alt="Project 1" class="w-15 h-15 mb-8"/>
+                            <h2 class="text-xl font-medium mb-4">Web Development</h2>
+                            <p class="text-sm w-full font-normal mb-3">With experience in HTML, CSS, Tailwind CSS, and Alpine.js, I develop responsive and accessible websites that function smoothly across different devices and browsers. My projects emphasize clean, maintainable code and pixel-perfect implementation of design mockups. I enjoy solving problems and bringing interactive web experiences to life.</p>
+                        </div>           
+                    </div>
+                    <!-- Other Skills -->
+                    <div id="skills-cardss1" class="slide-up-init">
+                        <div class="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 sm:px-8 lg:px-20">
+                            <img src="assets/css.webp" alt="Project 1" class="w-40 h-40 mb-8"/>
+                            <img src="assets/html.webp" alt="Project 1" class="w-40 h-40 mb-8"/>
+                            <img src="assets/js.webp" alt="Project 1" class="w-40 h-40 mb-8"/>
+                            <img src="assets/tailwind.webp" alt="Project 1" class="w-40 h-40 mb-8"/>
+                            <img src="assets/bootstrap.webp" alt="Project 1" class="w-40 h-40 mb-8"/>
+                            <img src="assets/android.webp" alt="Project 1" class="w-40 h-40 mb-8"/>
+                            <img src="assets/php.webp" alt="Project 1" class="w-40 h-40 mb-8"/>
+                            <img src="assets/java.webp" alt="Project 1" class="w-40 h-40 mb-8"/>
+                            <img src="assets/python.webp" alt="Project 1" class="sm:col-start-2 lg:col-start-1 w-40 h-40 mb-8"/>
+                            <img src="assets/flutter.webp" alt="Project 1" class="col-start-2 sm:col-start-3 w-40 h-40 mb-8"/>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footer Section -->
+            <footer class="py-4 w-full">
+                <div class="container mx-auto">
+                    <div class="h-px w-1/3 bg-gray-500 mx-auto mb-6"></div>
+                    <p class="text-sm font-normal text-center">Designed and developed by Princess Diane Pantoja © 2025</p>
+                </div>
+            </footer>
+        </main>
+    </div>
+
+    <!-- Desktop View -->
+    <div class="hidden lg:block">
+        <!-- Navbar -->
+        <section class="sticky top-0 z-20 w-full">
+            <nav class="py-6 px-6 text-[#E9DEFF] flex justify-center container mx-auto animate-slide-down1 delay-100">
+                <div class="bg-white/20 text-white rounded-full flex gap-8 px-10 py-3 text-base font-medium">
+                    <a href="index.html" class="hover:text-[#E9DEFF]">Home</a>
+                    <a href="#about" data-section="about" class="nav-link text-white hover:text-[#E9DEFF]">About</a>
+                    <a href="#portfolio" data-section="portfolio" class="nav-link text-white hover:text-[#E9DEFF]">Portfolio</a>
+                    <a href="#skills" data-section="skills" class="nav-link text-white hover:text-[#E9DEFF]">Skills</a>
+                </div>
+            </nav>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-20 px-8 md:px-20">
+            <div class="grid grid-cols-2 gap-12 items-center relative">
+                <!-- Left: Image with blob -->
+                <div class="relative justify-items-end animate-slide-in-left delay-100">
+                    <!-- Blob Decoration (closer to corner) -->
+                    <a href="assets/profile.webp" target="_blank" title="View Full Image">
+                        <div class="absolute -top-4 -right-1 w-14 h-14 z-0">
+                            <img src="assets/view.webp" class="w-full h-full"/>
+                        </div>
+                    </a>
+                    <!-- Profile Image -->
+                    <img src="assets/profile-pic.webp" alt="Diane Profile" class="rounded-[2rem] relatve z-10 w-96 h-86" />
+                </div>
+
+                <!-- Right: Text -->
+                <div class="w-110 animate-slide-in-right delay-200">
+                    <h2 class="text-3xl text-[#E9DEFF] font-medium mb-6">About Me</h2>
+                    <p class="mb-4 text-sm text-[#E9DEFF] font-normal">
+                        I am a Bachelor of Science in Computer Science graduate with practical experience in front-end web development.
+                        During my training at Fastrak Services Inc., I worked on real-world web projects, helping bring client websites
+                        to life through well-structured, visually appealing, and responsive designs.
+                    </p>
+                    <p class="mb-6 text-sm text-[#E9DEFF] font-normal">
+                        My approach combines creativity and functionality—ensuring every site I build doesn’t just look good,
+                        but also works seamlessly across all devices. I thrive on learning and continuously strive to improve my craft
+                        by staying updated with the latest trends in web technologies and design.
+                    </p>
+
+                    <!-- Contact Info -->
+                    <div class="space-y-4 text-sm text-[#E9DEFF] font-normal">
+                        <div class="flex items-center space-x-3">
+                            <a href="viber://chat?number=%2B639953582283" title="Message me on Viber"><img src="assets/faPhone.webp" alt="Phone Number" class="w-4"/></a>
+                            <span>+6399 5358 2283</span>
+                        </div>
+                        <div class="flex items-center text-[#E9DEFF] space-x-3">
+                            <a href="mailto:pantojaprincessdiane.05@gmail.com" target="_blank"><img src="assets/faEnvelope.webp" alt="Email" class="w-4"/></a>
+                            <span>pantojaprincessdiane.05@gmail.com</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Section -->
+        <section id="portfolio" class="py-20 px-20 w-full xl:px-50 text-center">
+            <!-- Section Header -->
+            <div id="portfolio-header" class="container mx-auto slide-down-init mb-12">
+                <div class="h-px w-1/3 bg-gray-500 mx-auto mb-20"></div>
+                <h2 class="text-3xl text-[#E9DEFF] font-medium mb-8">Portfolio Showcase</h2>
+                <p class="max-w-2xl mx-auto text-sm text-[#E9DEFF] font-normal">
+                A collection of my web design and development projects, highlighting my work in creating responsive, user-focused websites.
+                Each project reflects my passion for clean code, intuitive design, and seamless user experiences.
+                </p>
+            </div>
+
+            <!-- Wrapper with Alpine.js -->
+            <div x-data="{ category: 'project' }" class="container mx-auto">
+
+                <h2 class="text-2xl text-[#E9DEFF] font-light">Web Design</h2>
+
+                <!-- Card Sections -->
+                <div id="portfolio-cards" class="relative min-h-[18rem] px-6 slide-up-init">
+                    <!-- Project Cards Container -->
+                    <div class="swiper mySwiper absolute inset-0">
+                        <div class="swiper-wrapper my-4">
+                            <!-- Card 1 -->
+                            <div class="swiper-slide">
+                            <a href="https://diannnnannnna.github.io/ecommerce-website-lfsi/" target="_blank"
+                                class="bg-white/20 h-64 rounded-3xl flex items-center justify-center transition-transform duration-300 hover:scale-105 origin-center">
+                                <img src="assets/project1.webp" alt="Project 1" class="w-full h-45"/>
+                            </a>
+                            </div>
+                            <!-- Card 2 -->
+                            <div class="swiper-slide">
+                            <a href="https://diannnnannnna.github.io/fastrak-services-inc/" target="_blank"
+                                class="bg-white/20 h-64 rounded-3xl overflow-hidden flex items-center justify-center transition-transform duration-300 hover:scale-105">
+                                <img src="assets/project2.webp" alt="Project 2" class="w-full h-45"/>
+                            </a>
+                            </div>
+                            <!-- Card 3 -->
+                            <div class="swiper-slide">
+                            <a href="https://diannnnannnna.github.io/dfampc-/" target="_blank"
+                                class="bg-white/20 h-64 rounded-3xl overflow-hidden flex items-center justify-center transition-transform duration-300 hover:scale-105">
+                                <img src="assets/project3.webp" alt="Project 3" class="w-full h-45"/>
+                            </a>
+                            </div>
+                            <!-- Card 4 -->
+                            <div class="swiper-slide">
+                            <a href="https://diannnnannnna.github.io/beauty-and-care/" target="_blank"
+                                class="bg-white/20 h-64 rounded-3xl overflow-hidden flex items-center justify-center transition-transform duration-300 hover:scale-105">
+                                <img src="assets/project4.webp" alt="Project 4" class="w-full h-45"/>
+                            </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h2 class="text-2xl text-[#E9DEFF] font-light mt-10">Figma Design</h2>
+                    <!-- Figma Designs -->
+                    <div class="swiper mySwiper absolute inset-0">
+                         <div class="swiper-wrapper my-4">
+                            <!-- Card 1 -->
+                            <div class="swiper-slide">
+                            <a href="https://www.figma.com/design/wOQgDGeEXYcnB29nw3i9Mu/Life-Formula-Synergy-Inc.?node-id=0-1&t=hIBYVhPSMmarQ2ep-1" target="_blank"
+                                class="bg-white/20 h-64 rounded-3xl overflow-hidden flex items-center justify-center transition-transform duration-300 hover:scale-105">
+                                <img src="assets/figma1.webp" alt="Project 1" class="w-full h-45"/>
+                            </a>
+                            </div>
+                            <!-- Card 2 -->
+                            <div class="swiper-slide">
+                            <a href="https://www.figma.com/design/Hi31cdjShecCuWhOnmv5de/Rotation?node-id=0-1&t=VZRKIsShGOQzQeuW-1" target="_blank"
+                                class="bg-white/20 h-64 rounded-3xl overflow-hidden flex items-center justify-center transition-transform duration-300 hover:scale-105">
+                                <img src="assets/figma2.webp" alt="Project 2" class="w-full h-45"/>
+                            </a>
+                            </div>
+                            <!-- Card 3 -->
+                            <div class="swiper-slide">
+                            <a href="https://www.figma.com/design/CAuRZ3ckImZjf55tH1Zd92/TQ?node-id=0-1&t=JjYNIsjIrWBymONy-1" target="_blank"
+                                class="bg-white/20 h-64 rounded-3xl overflow-hidden flex items-center justify-center transition-transform duration-300 hover:scale-105">
+                                <img src="assets/figma3.webp" alt="Project 3" class="w-full h-45"/>
+                            </a>
+                            </div>
+                            <!-- Card 4 -->
+                            <div class="swiper-slide">
+                            <a href="https://www.figma.com/design/2OsdfyGDCEHXXNAzjm8gXT/Finance-Web-Design?node-id=0-1&t=xH2oCR4LLmLGAi7B-1" target="_blank"
+                                class="bg-white/20 h-64 rounded-3xl overflow-hidden flex items-center justify-center transition-transform duration-300 hover:scale-105">
+                                <img src="assets/figma4.webp" alt="Project 4" class="w-full h-45"/>
+                            </a>
+                            </div>
+                            <!-- Card 5 -->
+                            <div class="swiper-slide">
+                            <a href="https://www.figma.com/design/5c9IP3MQTnfbzdk1xDg6qe/Ecommerce-Web-Design?node-id=0-1&t=x3WRUi7Shw0Rdbng-1" target="_blank"
+                                class="bg-white/20 h-64 rounded-3xl overflow-hidden flex items-center justify-center transition-transform duration-300 hover:scale-105">
+                                <img src="assets/figma5.webp" alt="Project 4" class="w-full h-45"/>
+                            </a>
+                            </div>
+                            <!-- Card 6 -->
+                            <div class="swiper-slide">
+                            <a href="https://www.figma.com/design/Zv0K3QM0LCA7ViENe1fQoe/TOSTA?node-id=0-1&t=3mLNnwy7ntI0DPAD-1" target="_blank"
+                                class="bg-white/20 h-64 rounded-3xl overflow-hidden flex items-center justify-center transition-transform duration-300 hover:scale-105">
+                                <img src="assets/figma6.webp" alt="Project 4" class="w-full h-45"/>
+                            </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Graphic Designs -->
+                    <h2 class="text-2xl text-[#E9DEFF] font-light mt-10">Graphic Design</h2>
+
+                    <!-- Logo Design -->
+                    <div class="swiper mySwiper absolute inset-0">
+                         <div class="swiper-wrapper my-4">
+                            <!-- Card 1 -->
+                            <div class="swiper-slide">
+                            <a href="#" target="_blank"
+                                class="bg-white/20 h-64 rounded-3xl overflow-hidden flex items-center justify-center transition-transform duration-300 hover:scale-105">
+                                <img src="assets/logo1.webp" alt="Logo 1" class="w-full h-full"/>
+                            </a>
+                            </div>
+                            <!-- Card 2 -->
+                            <div class="swiper-slide">
+                            <a href="#" target="_blank"
+                                class="bg-white/20 h-64 rounded-3xl overflow-hidden flex items-center justify-center transition-transform duration-300 hover:scale-105">
+                                <img src="assets/logo2.webp" alt="Logo 2" class="w-full h-full"/>
+                            </a>
+                            </div>
+                            <!-- Card 3 -->
+                            <div class="swiper-slide">
+                            <a href="#" target="_blank"
+                                class="bg-white/20 h-64 rounded-3xl overflow-hidden flex items-center justify-center transition-transform duration-300 hover:scale-105">
+                                <img src="assets/logo3.webp" alt="Logo 3" class="w-full h-full"/>
+                            </a>
+                            </div>
+                            <!-- Card 4 -->
+                            <div class="swiper-slide">
+                            <a href="#" target="_blank"
+                                class="bg-white/20 h-64 rounded-3xl overflow-hidden flex items-center justify-center transition-transform duration-300 hover:scale-105">
+                                <img src="assets/logo4.webp" alt="Logo 4" class="w-full h-full"/>
+                            </a>
+                            </div>
+                            <!-- Card 5 -->
+                            <div class="swiper-slide">
+                            <a href="#" target="_blank"
+                                class="bg-white/20 h-64 rounded-3xl overflow-hidden flex items-center justify-center transition-transform duration-300 hover:scale-105">
+                                <img src="assets/logo5.webp" alt="Logo 5" class="w-full h-full"/>
+                            </a>
+                            </div>
+                            <!-- Card 6 -->
+                            <div class="swiper-slide">
+                            <a href="#" target="_blank"
+                                class="bg-white/20 h-64 rounded-3xl overflow-hidden flex items-center justify-center transition-transform duration-300 hover:scale-105">
+                                <img src="assets/logo6.webp" alt="Logo 6" class="w-full h-full"/>
+                            </a>
+                            </div>
+                             <!-- Card 7 -->
+                            <div class="swiper-slide">
+                            <a href="#" target="_blank"
+                                class="bg-white/20 h-64 rounded-3xl overflow-hidden flex items-center justify-center transition-transform duration-300 hover:scale-105">
+                                <img src="assets/logo7.webp" alt="Logo 7" class="w-full h-full"/>
+                            </a>
+                            </div>
+                             <!-- Card 8 -->
+                            <div class="swiper-slide">
+                            <a href="#" target="_blank"
+                                class="bg-white/20 h-64 rounded-3xl overflow-hidden flex items-center justify-center transition-transform duration-300 hover:scale-105">
+                                <img src="assets/logo8.webp" alt="Logo 8" class="w-full h-full"/>
+                            </a>
+                            </div>
+                             <!-- Card 9 -->
+                            <div class="swiper-slide">
+                            <a href="#" target="_blank"
+                                class="bg-white/20 h-64 rounded-3xl overflow-hidden flex items-center justify-center transition-transform duration-300 hover:scale-105">
+                                <img src="assets/logo9.webp" alt="Logo 9" class="w-full h-full"/>
+                            </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Shirt Design -->
+                    <div class="swiper mySwiper absolute mt-10 inset-0">
+                         <div class="swiper-wrapper my-4">
+                            <!-- Card 1 -->
+                            <div class="swiper-slide">
+                            <a href="#" target="_blank"
+                                class="bg-white/20 h-64 rounded-3xl overflow-hidden flex items-center justify-center transition-transform duration-300 hover:scale-105">
+                                <img src="assets/shirt1.webp" alt="Shirt 1" class="w-full h-full"/>
+                            </a>
+                            </div>
+                            <!-- Card 2 -->
+                            <div class="swiper-slide">
+                            <a href="#" target="_blank"
+                                class="bg-white/20 h-64 rounded-3xl overflow-hidden flex items-center justify-center transition-transform duration-300 hover:scale-105">
+                                <img src="assets/shirt2.webp" alt="Shirt 2" class="w-full h-full"/>
+                            </a>
+                            </div>
+                            <!-- Card 3 -->
+                            <div class="swiper-slide">
+                            <a href="#" target="_blank"
+                                class="bg-white/20 h-64 rounded-3xl overflow-hidden flex items-center justify-center transition-transform duration-300 hover:scale-105">
+                                <img src="assets/shirt3.webp" alt="Shirt 3" class="w-full h-full"/>
+                            </a>
+                            </div>
+                            <!-- Card 4 -->
+                            <div class="swiper-slide">
+                            <a href="#" target="_blank"
+                                class="bg-white/20 h-64 rounded-3xl overflow-hidden flex items-center justify-center transition-transform duration-300 hover:scale-105">
+                                <img src="assets/shirt4.webp" alt="Shirt 4" class="w-full h-full"/>
+                            </a>
+                            </div>
+                            <!-- Card 5 -->
+                            <div class="swiper-slide">
+                            <a href="#" target="_blank"
+                                class="bg-white/20 h-64 rounded-3xl overflow-hidden flex items-center justify-center transition-transform duration-300 hover:scale-105">
+                                <img src="assets/shirt5.webp" alt="Shirt 5" class="w-full h-full"/>
+                            </a>
+                            </div>
+                            <!-- Card 6 -->
+                            <div class="swiper-slide">
+                            <a href="#" target="_blank"
+                                class="bg-white/20 h-64 rounded-3xl overflow-hidden flex items-center justify-center transition-transform duration-300 hover:scale-105">
+                                <img src="assets/shirt6.webp" alt="Shirt 6" class="w-full h-full"/>
+                            </a>
+                            </div>
+                             <!-- Card 7 -->
+                            <div class="swiper-slide">
+                            <a href="#" target="_blank"
+                                class="bg-white/20 h-64 rounded-3xl overflow-hidden flex items-center justify-center transition-transform duration-300 hover:scale-105">
+                                <img src="assets/shirt7.webp" alt="Shirt 7" class="w-full h-full"/>
+                            </a>
+                            </div>
+                             <!-- Card 8 -->
+                            <div class="swiper-slide">
+                            <a href="#" target="_blank"
+                                class="bg-white/20 h-64 rounded-3xl overflow-hidden flex items-center justify-center transition-transform duration-300 hover:scale-105">
+                                <img src="assets/shirt8.webp" alt="Shirt 8" class="w-full h-full"/>
+                            </a>
+                            </div>
+                             <!-- Card 9 -->
+                            <div class="swiper-slide">
+                            <a href="#" target="_blank"
+                                class="bg-white/20 h-64 rounded-3xl overflow-hidden flex items-center justify-center transition-transform duration-300 hover:scale-105">
+                                <img src="assets/shirt9.webp" alt="Shirt 9" class="w-full h-full"/>
+                            </a>
+                            </div>
+                        </div>
+                    </div>
+                     <!-- Poster Design -->
+                    <div class="swiper mySwiper absolute mt-10 inset-0">
+                         <div class="swiper-wrapper my-4">
+                            <!-- Card 1 -->
+                            <div class="swiper-slide">
+                            <a href="#" target="_blank"
+                                class="bg-white/20 h-64 rounded-3xl overflow-hidden flex items-center justify-center transition-transform duration-300 hover:scale-105">
+                                <img src="assets/Poster1.webp" alt="Shirt 1" class="w-50 h-full"/>
+                            </a>
+                            </div>
+                            <!-- Card 2 -->
+                            <div class="swiper-slide">
+                            <a href="#" target="_blank"
+                                class="bg-white/20 h-64 rounded-3xl overflow-hidden flex items-center justify-center transition-transform duration-300 hover:scale-105">
+                                <img src="assets/Poster2.webp" alt="Shirt 2" class="w-50 h-full"/>
+                            </a>
+                            </div>
+                            <!-- Card 3 -->
+                            <div class="swiper-slide">
+                            <a href="#" target="_blank"
+                                class="bg-white/20 h-64 rounded-3xl overflow-hidden flex items-center justify-center transition-transform duration-300 hover:scale-105">
+                                <img src="assets/Poster3.webp" alt="Shirt 3" class="w-50 h-full"/>
+                            </a>
+                            </div>
+                            <!-- Card 4 -->
+                            <div class="swiper-slide">
+                            <a href="#" target="_blank"
+                                class="bg-white/20 h-64 rounded-3xl overflow-hidden flex items-center justify-center transition-transform duration-300 hover:scale-105">
+                                <img src="assets/Poster4.webp" alt="Shirt 4" class="w-50 h-full"/>
+                            </a>
+                            </div>
+                            <!-- Card 5 -->
+                            <div class="swiper-slide">
+                            <a href="#" target="_blank"
+                                class="bg-white/20 h-64 rounded-3xl overflow-hidden flex items-center justify-center transition-transform duration-300 hover:scale-105">
+                                <img src="assets/Poster5.webp" alt="Shirt 5" class="w-50 h-full"/>
+                            </a>
+                            </div>
+                            <!-- Card 6 -->
+                            <div class="swiper-slide">
+                            <a href="#" target="_blank"
+                                class="bg-white/20 h-64 rounded-3xl overflow-hidden flex items-center justify-center transition-transform duration-300 hover:scale-105">
+                                <img src="assets/Poster6.webp" alt="Shirt 6" class="w-50 h-full"/>
+                            </a>
+                            </div>
+                             <!-- Card 7 -->
+                            <div class="swiper-slide">
+                            <a href="#" target="_blank"
+                                class="bg-white/20 h-64 rounded-3xl overflow-hidden flex items-center justify-center transition-transform duration-300 hover:scale-105">
+                                <img src="assets/Poster7.webp" alt="Shirt 7" class="w-50 h-full"/>
+                            </a>
+                            </div>
+                             <!-- Card 8 -->
+                            <div class="swiper-slide">
+                            <a href="#" target="_blank"
+                                class="bg-white/20 h-64 rounded-3xl overflow-hidden flex items-center justify-center transition-transform duration-300 hover:scale-105">
+                                <img src="assets/Poster8.webp" alt="Shirt 8" class="w-50 h-full"/>
+                            </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="py-20 px-20 xl:px-50 w-full text-center">
+            <div class="container mx-auto">
+                <!-- Section Header -->
+                <div id="skills-header" class="slide-down-init mb-12">
+                    <div class="h-px w-1/3 bg-gray-500 mx-auto mb-20"></div>
+                    <h2 class="text-3xl text-[#E9DEFF] font-medium mb-8">Skills</h2>
+                </div>
+                <!-- Skills Cards Sections -->
+                <div id="skills-cards" class="relative min-h-[18rem] grid grid-cols-3 mb-24 slide-up-init">
+                    <!-- Card 1 -->
+                    <div class="p-6 bg-white/20 h-full rounded-3xl text-start items-start justify-start transition-transform duration-300 hover:scale-105">
+                        <img src="assets/uiux.webp" alt="Project 1" class="w-15 h-15 mb-8"/>
+                        <h2 class="text-xl text-[#E9DEFF] font-medium mb-4">UI/UX Design</h2>
+                        <p class="text-sm text-[#E9DEFF] w-full font-normal mb-3">Good design is more than just looks—it's about how it feels. I focus on user experience by designing interfaces that are both intuitive and enjoyable to use. I prioritize user needs and feedback to create flows and layouts that enhance usability, ensuring every interaction is smooth and meaningful.</p>
+                    </div>
+                    <!-- Card 2 -->
+                    <div class="p-6 h-full ml-2 text-start items-start justify-start transition-transform duration-300 hover:scale-105">
+                        <img src="assets/web.webp" alt="Project 1" class="w-15 h-15 mb-8"/>
+                        <h2 class="text-xl text-[#E9DEFF] font-medium mb-4">Web Design</h2>
+                        <p class="text-sm text-[#E9DEFF] w-full font-normal mb-3">I create intuitive, aesthetically pleasing web designs tailored to meet user expectations and business goals. My focus is on visual hierarchy, readability, and usability to ensure every design engages and guides users naturally. From wireframes to polished mockups, I aim for clarity and consistency in every detail.</p>
+                    </div>
+                    <!-- Card 3 -->
+                    <div class="p-6 h-full text-start items-start justify-start transition-transform duration-300 hover:scale-105">
+                        <img src="assets/code.webp" alt="Project 1" class="w-15 h-15 mb-8"/>
+                        <h2 class="text-xl text-[#E9DEFF] font-medium mb-4">Web Development</h2>
+                        <p class="text-sm text-[#E9DEFF] w-full font-normal mb-3">With experience in HTML, CSS, Tailwind CSS, and Alpine.js, I develop responsive and accessible websites that function smoothly across different devices and browsers. My projects emphasize clean, maintainable code and pixel-perfect implementation of design mockups. I enjoy solving problems and bringing interactive web experiences to life.</p>
+                    </div>           
+                </div>
+                <!-- Other Skills -->
+                <h2 class="text-2xl text-[#E9DEFF] mb-20">Other Skills</h2>
+                <div id="skills-cardss" class="slide-up-init">
+                    <div class="grid grid-cols-8  items-center px-50">
+                        <img src="assets/css.webp" alt="Project 1" class="w-20 h-20 mb-8"/>
+                        <img src="assets/html.webp" alt="Project 1" class="w-20 h-20 mb-8"/>
+                        <img src="assets/js.webp" alt="Project 1" class="w-20 h-20 mb-8"/>
+                        <img src="assets/tailwind.webp" alt="Project 1" class="w-20 h-20 mb-8"/>
+                        <img src="assets/bootstrap.webp" alt="Project 1" class="w-20 h-20 mb-8"/>
+                        <img src="assets/android.webp" alt="Project 1" class="w-20 h-20 mb-8"/>
+                        <img src="assets/php.webp" alt="Project 1" class="w-20 h-20 mb-8"/>
+                        <img src="assets/java.webp" alt="Project 1" class="w-20 h-20 mb-8"/>
+                        <img src="assets/python.webp" alt="Project 1" class="lg:col-start-2 w-20 h-20 mb-8"/>
+                        <img src="assets/flutter.webp" alt="Project 1" class="w-20 h-20 mb-8"/>
+                        <img src="assets/illustrator.webp" alt="Project 1" class="w-16 h-16 mb-8"/>
+                        <img src="assets/figma.webp" alt="Project 1" class="w-20 h-20 mb-8"/>
+                         <img src="assets/inkscape.webp" alt="Project 1" class="w-18 h-18 mb-8"/>
+                        <img src="assets/medibang.webp" alt="Project 1" class="w-16 h-16 mb-8"/>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Footer Section -->
+        <footer class="py-4 w-full">
+            <div class="container mx-auto">
+                <div class="h-px w-1/3 bg-gray-500 mx-auto mb-6"></div>
+                <p class="text-sm text-[#E9DEFF] font-normal text-center">Designed and developed by Princess Diane Pantoja © 2025</p>
+            </div>
+        </footer>
+    </div>
+   
+    <!-- Script Links -->
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  </body>
+</html>
